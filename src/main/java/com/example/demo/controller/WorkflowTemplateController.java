@@ -36,3 +36,4 @@ public class WorkflowTemplateController {
         return workflowTemplateService.setActive(id, active);
     }
 }
+

@@ -1,19 +1,20 @@
 package com.example.demo.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import java.util.List;
 
 @Configuration
-public class SwaggerConfig {
+public class OSWConfig {
 
     @Bean
-    public OpenAPI workflowOpenAPI() {
+    public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(new Info()
-                        .title("Workflow Engine API")
-                        .description("Workflow Approval System APIs")
-                        .version("1.0"));
-    }
+                // You need to change the port as per your server
+                .servers(List.of(
+                        new Server().url("https://9284.pro604cr.amypo.ai/")
+                ));
+        }
 }
