@@ -27,4 +27,5 @@ public class ApprovalRequestService {
     public List<ApprovalRequest> getAllRequests() {
         return approvalRequestRepository.findAll();
     }
+    
 }
