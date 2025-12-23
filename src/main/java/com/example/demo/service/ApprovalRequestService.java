@@ -15,23 +15,15 @@ public class ApprovalRequestService {
         this.repository = repository;
     }
 
-    // Create or Update Approval Request
-    public ApprovalRequest save(ApprovalRequest approvalRequest) {
-        return repository.save(approvalRequest);
+    public ApprovalRequest createRequest(ApprovalRequest request) {
+        return repository.save(request);
     }
 
-    // ✅ FIXED: Get Approval Request by ID
     public ApprovalRequest getById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    // Get all approval requests
-    public List<ApprovalRequest> getAll() {
+    public List<ApprovalRequest> getAllRequests() {
         return repository.findAll();
-    }
-
-    // Delete approval request
-    public void delete(Long id) {
-        repository.deleteById(id);
     }
 }
