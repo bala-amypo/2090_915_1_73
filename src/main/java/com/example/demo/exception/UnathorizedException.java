@@ -1,8 +1,11 @@
 package com.example.demo.exception;
 
-public class UnauthorizedException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public UnauthorizedException(String message) {
-        super(message);
+@ResponseStatus(HttpStatus.UNAUTHORIZED)
+public class UnauthorizedException extends RuntimeException {
+    public UnauthorizedException(String msg) {
+        super(msg);
     }
 }
