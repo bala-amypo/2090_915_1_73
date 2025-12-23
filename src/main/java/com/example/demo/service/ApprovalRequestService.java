@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.model.ApprovalRequest;
 import com.example.demo.repository.ApprovalRequestRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,22 +9,29 @@ import java.util.List;
 @Service
 public class ApprovalRequestService {
 
-    @Autowired
-    private ApprovalRequestRepository approvalRequestRepository;
+    private final ApprovalRequestRepository repository;
 
-    public ApprovalRequest createRequest(ApprovalRequest request) {
-        if (request.getStatus() == null) {
-            request.setStatus("PENDING");
-        }
-        return approvalRequestRepository.save(request);
+    public ApprovalRequestService(ApprovalRequestRepository repository) {
+        this.repository = repository;
     }
 
-    public List<ApprovalRequest> getRequestsByRequester(Long requesterId) {
-        return approvalRequestRepository.findByRequesterId(requesterId);
+    // Create or Update Approval Request
+    public ApprovalRequest save(ApprovalRequest approvalRequest) {
+        return repository.save(approvalRequest);
     }
 
-    public List<ApprovalRequest> getAllRequests() {
-        return approvalRequestRepository.findAll();
+    // ✅ FIXED: Get Approval Request by ID
+    public ApprovalRequest getById(Long id) {
+        return repository.findById(id).orElse(null);
     }
-    
+
+    // Get all approval requests
+    public List<ApprovalRequest> getAll() {
+        return repository.findAll();
+    }
+
+    // Delete approval request
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }
