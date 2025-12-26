@@ -1,14 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.ApprovalRequest;
+import com.example.demo.model.ApprovalRequest;
 import java.util.List;
-import java.lang.Long;
 
 public interface ApprovalRequestService {
-
-    ApprovalRequest createRequest(ApprovalRequest req);
-
+    ApprovalRequest createRequest(ApprovalRequest request);
     List<ApprovalRequest> getRequestsByRequester(Long userId);
-
     List<ApprovalRequest> getAllRequests();
 }

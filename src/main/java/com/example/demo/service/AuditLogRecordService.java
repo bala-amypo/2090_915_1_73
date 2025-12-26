@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.AuditLogRecord;
+import com.example.demo.model.AuditLogRecord;
 
-public interface AuditLogRecordService {
-
-    AuditLogRecord save(AuditLogRecord record);
+public interface AuditLogService {
+    AuditLogRecord createAuditLog(AuditLogRecord auditLog);
 }
