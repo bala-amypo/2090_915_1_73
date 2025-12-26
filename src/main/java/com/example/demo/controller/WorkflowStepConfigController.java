@@ -1,29 +1,37 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.WorkflowStepConfig;
+import com.example.demo.model.WorkflowStepConfig;
 import com.example.demo.service.WorkflowStepConfigService;
-import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.lang.Long;
 
 @RestController
 @RequestMapping("/api/steps")
+@Tag(name = "Workflow Steps", description = "Workflow step configuration management")
 public class WorkflowStepConfigController {
-
+    
     private final WorkflowStepConfigService workflowStepConfigService;
-
+    
+    @Autowired
     public WorkflowStepConfigController(WorkflowStepConfigService workflowStepConfigService) {
         this.workflowStepConfigService = workflowStepConfigService;
     }
-
+    
     @PostMapping
-    public ResponseEntity<WorkflowStepConfig> createStep(@RequestBody WorkflowStepConfig stepConfig) {
-        return ResponseEntity.ok(workflowStepConfigService.createStep(stepConfig));
+    @Operation(summary = "Create a new workflow step")
+    public ResponseEntity<WorkflowStepConfig> createStep(@RequestBody WorkflowStepConfig step) {
+        WorkflowStepConfig created = workflowStepConfigService.createStep(step);
+        return ResponseEntity.ok(created);
     }
-
+    
     @GetMapping("/template/{templateId}")
+    @Operation(summary = "Get workflow steps for template")
     public ResponseEntity<List<WorkflowStepConfig>> getStepsForTemplate(@PathVariable Long templateId) {
-        return ResponseEntity.ok(workflowStepConfigService.getStepsForTemplate(templateId));
+        List<WorkflowStepConfig> steps = workflowStepConfigService.getStepsForTemplate(templateId);
+        return ResponseEntity.ok(steps);
     }
 }
